@@ -9,7 +9,7 @@ const override: CSSProperties = {
 };
 
 export default function Home() {
-  const [random, SetRandom] = useState<String>("Press Random")
+  const [random, SetRandom] = useState<String>("Lets Bingo!")
   const [remainingWords, SetRemainingWords] = useState<String[]>(words);
   const generateRandom = () => {
     setLoading(true);
@@ -36,7 +36,7 @@ export default function Home() {
   let [color, setColor] = useState("#ffffff");
   return (
     <main className="h-screen text-white p-5">
-      <div className="flex justify-center text-3xl my-14 h-10">
+      <div className="flex justify-center text-3xl my-8 h-10">
         {loading ?
           <div>
             <ScaleLoader
@@ -47,12 +47,12 @@ export default function Home() {
               data-testid="loader"
             /></div> : <h1>{random}</h1>}
       </div>
-      <div className="flex justify-center m-10">
-        <button className="bg-white text-black rounded p-2 " onClick={generateRandom} >Random</button>
+      <div className="flex justify-center m-5">
+        <button className={`bg-white text-black rounded p-2 text-xl ${loading ? 'bg-gray-300 text-gray-500' : 'bg-white'}`} disabled={loading} onClick={generateRandom} >Bingo</button>
       </div>
-      <div className="grid grid-cols-7 gap-3 " >
+      <div className="grid grid-cols-7 gap-2 " >
         {words.map((word, i) => (
-          <div key={i} className={`min-w-fit w-full h-10 bg-green-300 p-2 text-black flex justify-center items-center rounded ${filterWord(word) ? 'bg-red-300' : 'bg-green-300'}`}>
+          <div key={i} className={`min-w-fit w-full h-10 bg-green-300 p-2 text-black flex justify-center items-center rounded ${filterWord(word) ? 'bg-red-300 hover:bg-red-400' : 'bg-green-300 hover:bg-green-400'} cursor-default`}>
             <h1>{word}</h1>
           </div>
         ))}
