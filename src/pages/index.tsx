@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react"
+import { CSSProperties, useState } from "react"
 import { words } from "@/lib/words"
-import ClipLoader from "react-spinners/ClipLoader";
-import { ClockLoader, RingLoader, ScaleLoader } from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 const override: CSSProperties = {
   display: "block",
@@ -10,11 +9,6 @@ const override: CSSProperties = {
 };
 
 export default function Home() {
-  // const words = [
-  //   "rishabh",
-  //   "yushu",
-  //   "pipi"
-  // ]
   const [random, SetRandom] = useState<String>("Press Random")
   const [remainingWords, SetRemainingWords] = useState<String[]>(words);
   const generateRandom = () => {
@@ -44,12 +38,11 @@ export default function Home() {
     <main className="h-screen text-white p-5">
       <div className="flex justify-center text-3xl my-14 h-10">
         {loading ?
-          <div className="">
+          <div>
             <ScaleLoader
               color={color}
               loading={loading}
               cssOverride={override}
-              // size={50}
               aria-label="Loading Spinner"
               data-testid="loader"
             /></div> : <h1>{random}</h1>}
@@ -57,9 +50,9 @@ export default function Home() {
       <div className="flex justify-center m-10">
         <button className="bg-white text-black rounded p-2 " onClick={generateRandom} >Random</button>
       </div>
-      <div className="grid grid-cols-7 gap-3 ">
+      <div className="grid grid-cols-7 gap-3 " >
         {words.map((word, i) => (
-          <div key={i} className={`min-w-fit w-24 h-10 bg-green-300 p-2 text-black flex justify-center items-center rounded ${filterWord(word) ? 'bg-red-300' : 'bg-green-300'}`}>
+          <div key={i} className={`min-w-fit w-full h-10 bg-green-300 p-2 text-black flex justify-center items-center rounded ${filterWord(word) ? 'bg-red-300' : 'bg-green-300'}`}>
             <h1>{word}</h1>
           </div>
         ))}
